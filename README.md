@@ -1,3 +1,15 @@
+## Branches 
+
+feat/auth : user + login + register
+
+feat/posts-front : pages accueil + liste + détail
+
+feat/comments : ajout commentaire + signalement
+
+feat/admin : backoffice (CRUD + modération)
+
+feat/contact : formulaire contact + mail
+
 ## Installation (dev)
 
 La base PostgreSQL est lancée en local via Docker (volume local).  
