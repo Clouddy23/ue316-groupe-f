@@ -50,26 +50,26 @@ Chaque membre doit donc initialiser sa propre base sur sa machine.
 composer install
 ```
 
-### 2) Lancement de PostgreSQL
+### Lancement de PostgreSQL
 ```bash
 docker compose up -d
 docker compose ps
 ```
 PostgreSQL est en local sur 127.0.0.1:5432
 
-### 3) Configuration de la BDD dans Symfony (local)
+### Configuration de la BDD dans Symfony (local)
 Créarion d'un fichier .env.local à la racine (à mettre dans .gitignore)
 
 ```bash
 DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"
 ```
 
-### 4) Initialisation de la BDD
+### Initialisation de la BDD
 ```bash
 php bin/console doctrine:database:create
 ```
 
-### 5) Lancement du serveur Symfony
+### Lancement du serveur Symfony
 ```bash
 symfony serve -d
 ```
