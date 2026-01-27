@@ -111,34 +111,51 @@ php bin/console make:user
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
 
-WARNING! You are about to execute a migration in database "app" that could result in schema changes and data loss. Are you sure you wish to continue? (yes/no) [yes]: > yes
+•	WARNING! You are about to execute a migration in database "app" that could result in schema changes and data loss. Are you sure you wish to continue? (yes/no) [yes]:
+> yes
 ```
 
 ### Génération de la page de connexion
 ```bash
 php bin/console make:auth
 
-What style of authentication do you want? [Empty authenticator]:
+•	What style of authentication do you want? [Empty authenticator]:
   [0] Empty authenticator
   [1] Login form authenticator
 > 1
 
-The class name of the authenticator to create (e.g. AppCustomAuthenticator):
+•	The class name of the authenticator to create (e.g. AppCustomAuthenticator):
 > AppAuthenticator
 
-Choose a name for the controller class (e.g. SecurityController) [SecurityController]:
+•	Choose a name for the controller class (e.g. SecurityController) [SecurityController]:
 > SecurityController
 
-Do you want to generate a '/logout' URL? (yes/no) [yes]:
+•	Do you want to generate a '/logout' URL? (yes/no) [yes]:
 > yes
 
-Do you want to support remember me? (yes/no) [yes]:
+•	Do you want to support remember me? (yes/no) [yes]:
 > yes
 
-How should remember me be activated? [Activate when the user checks a box]:
+•	How should remember me be activated? [Activate when the user checks a box]:
   [0] Activate when the user checks a box
   [1] Always activate remember me
 > 0
 ```
 
+### Génération de la page d'inscription
+```bash
+php bin/console make:registration-form
+
+•	Do you want to add a #[UniqueEntity] validation attribute to your User class to make sure duplicate accounts aren't created? (yes/no) [yes]:
+> yes
+
+•	Do you want to send an email to verify the user's email address after registration? (yes/no) [yes]:
+> no
+
+•	Do you want to automatically authenticate the user after registration? (yes/no) [yes]:
+> yes
+
+•	Do you want to generate PHPUnit tests? [Experimental] (yes/no) [no]:
+> no
+```
 
