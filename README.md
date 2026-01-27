@@ -224,9 +224,8 @@ Adapter la syntaxe des contraintes de validation du formulaire d’inscription a
 ])
 ```
 
-### Ajout des liens Login/Register/Logout
+### Ajout des liens Login/Register/Logout dans templates > base.html/twig**
 
-**Dans templates > base.html/twig :**
 - Ajout d'un bouton LOGOUT si connecté
 - Ajout des boutons LOGIN/REGISTER si non connecté
 
@@ -245,5 +244,18 @@ Adapter la syntaxe des contraintes de validation du formulaire d’inscription a
         {% block body %}{% endblock %}
     </body>
 ```
+
+### Préparation d'un admin pour la future branche ``feat/admin``**
+
+**Création de l'admin**
+http://127.0.0.1:8000/register
+- email : admin@test.fr
+- mot de passe : !changeme!test
+
+**Passage de l'utilisateur admin en BDD**
+```bash
+docker compose exec database psql -U app -d app
+```
+
 
 
