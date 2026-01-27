@@ -36,6 +36,13 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 | Tests fonctionnels                                          |                                     |
 | Documentation : webographie + README.md                     | Mathilde                            |
 
+### Calendrier de suivi du projet
+
+| Échéance | Objectif                                                                                                                                                                                  |
+| :------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|  25/01   | Installation del’environnement de développement Symfony (IDE, serveur local, Composer/Symfony CLI) puis création et lancement du projet Symfony en local.                                 |
+|  01/02   | Mise en place de la BDD via .env, ajout de l’authentification, création de l’entité Post, génération du CRUD et installation/configuration d’un bundle d’administration (EasyAdmin)       |
+
 ## BRANCHE ``feat/env-setup``
 
 La base PostgreSQL est lancée en local via Docker (volume local).  
