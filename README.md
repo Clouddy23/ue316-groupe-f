@@ -85,4 +85,27 @@ Puis ouvrir : http://127.0.0.1:8000
 
 ## BRANCHE ``feat/auth``
 
+### Vérification de l'environnement
+```bash
+docker compose up -d
+docker compose ps
+```
+
+### Installation des dépendances
+```bash
+composer require symfony/security-bundle symfony/twig-bundle symfony/validator
+composer require --dev symfony/maker-bundle
+```
+
+### Création de l'entité ``User``
+```bash
+php bin/console make:user
+
+•	The name of the security user class (e.g. User) [User] > User
+•	Do you want to store user data in the database (via Doctrine)? (yes/no) [yes] > yes
+•	Enter a property name that will be the unique "display" name for the user (e.g. email, username, uuid) [email]: > email
+•	Does this app need to hash/check user passwords? (yes/no) [yes]: > yes
+```
+
+
 
