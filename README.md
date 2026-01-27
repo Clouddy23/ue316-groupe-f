@@ -2,10 +2,7 @@
 
 La base PostgreSQL est lancée en local via Docker (volume local).  
 Chaque membre doit donc initialiser sa propre base sur sa machine.
-
-### Prérequis
-- PHP + Composer
-- Docker Desktop
+**Prérequis** : PHP + Composer + Docker Desktop
 
 ### 1) Installer les dépendances PHP
 ```bash
