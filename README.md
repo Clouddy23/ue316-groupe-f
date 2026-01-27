@@ -106,6 +106,39 @@ php bin/console make:user
 •	Enter a property name that will be the unique "display" name for the user (e.g. email, username, uuid) [email]: > email
 •	Does this app need to hash/check user passwords? (yes/no) [yes]: > yes
 ```
+### Migration de ``User`` & Création tables
+```bash
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
 
+WARNING! You are about to execute a migration in database "app" that could result in schema changes and data loss. Are you sure you wish to continue? (yes/no) [yes]: > yes
+```
+
+### Génération de la page de connexion
+```bash
+php bin/console make:auth
+
+What style of authentication do you want? [Empty authenticator]:
+  [0] Empty authenticator
+  [1] Login form authenticator
+> 1
+
+The class name of the authenticator to create (e.g. AppCustomAuthenticator):
+> AppAuthenticator
+
+Choose a name for the controller class (e.g. SecurityController) [SecurityController]:
+> SecurityController
+
+Do you want to generate a '/logout' URL? (yes/no) [yes]:
+> yes
+
+Do you want to support remember me? (yes/no) [yes]:
+> yes
+
+How should remember me be activated? [Activate when the user checks a box]:
+  [0] Activate when the user checks a box
+  [1] Always activate remember me
+> 0
+```
 
 
