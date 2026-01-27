@@ -1,3 +1,14 @@
+# UEL316 - Application web d’actualités avec Symfony 7
+
+## Membres du groupe
+
+| Etudiant.e  |   Alias    |
+| :---------: | :--------: |
+| Mathilde C. | Clouddy23  |
+|   Kamo G.   | Spaghette5 |
+| Mathieu L.  |  mathleys  |
+| Filippos K. |  filkat34  |
+
 ## Branches 
 
 - feat/auth : user + login + register
