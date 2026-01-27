@@ -196,6 +196,32 @@ php bin/console cache:clear
 php bin/console debug:router
 ```
 
+### Adaptation à la syntaxe Symfony 7 du fichier ``RegistrationFormType.php``
+Adapter la syntaxe des contraintes de validation du formulaire d’inscription aux pratiques de Symfony 7, en remplaçant l’ancienne configuration par tableaux par l’utilisation des arguments nommés.
 
+```bash
+->add('agreeTerms', CheckboxType::class, [
+    'mapped' => false,
+    'constraints' => [
+        new IsTrue(
+            message: 'You should agree to our terms.'
+        ),
+    ],
+])
+```
+
+```bash
+    'constraints' => [
+        new NotBlank(
+            message: 'Please enter a password',
+        ),
+        new Length(
+            min: 6,
+            minMessage: 'Your password should be at least {{ limit }} characters',
+            max: 4096,
+        ),
+    ],
+])
+```
 
 
