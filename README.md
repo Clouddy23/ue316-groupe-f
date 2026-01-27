@@ -1,14 +1,5 @@
 # UEL316 - Application web d’actualités avec Symfony 7
 
-## Membres du groupe
-
-| Etudiant.e  |   Alias    |
-| :---------: | :--------: |
-| Mathilde C. | Clouddy23  |
-|   Kamo G.   | Spaghette5 |
-| Mathieu L.  |  mathleys  |
-| Filippos K. |  filkat34  |
-
 ## Objectifs
 L’objectif principal de ce projet est de concevoir et développer une application web dynamique sans recours à un CMS, en utilisant le **framework Symfony 7**, afin de répondre aux besoins d’un client souhaitant disposer d’un site d’actualités moderne et administrable.
 
@@ -18,13 +9,32 @@ L’objectif principal de ce projet est de concevoir et développer une applicat
 - [x] Développer un **backoffice** réservé aux administrateurs pour : la gestion des actualités (création, modification, suppression), la modération des commentaires, la gestion des utilisateurs.
 - [x] Assurer la persistance des données via **Doctrine ORM** et une **base de données relationnelle**.
 
-## Branches 
+## Principe général de collaboration
 
-- feat/auth : user + login + register
-- feat/posts-front : pages accueil + liste + détail
-- feat/comments : ajout commentaire + signalement
-- feat/admin : backoffice (CRUD + modération)
-- feat/contact : formulaire contact + mail
+## Membres du groupe
+
+| Etudiant.e  |   Alias    |
+| :---------: | :--------: |
+| Mathilde C. | Clouddy23  |
+|   Kamo G.   | Spaghette5 |
+| Mathieu L.  |  mathleys  |
+| Filippos K. |  filkat34  |
+
+### Répartition du travail
+
+Chacun des membres du groupe a contribué au projet selon ses disponibilités et compétences, tout le monde s'est montré impliqué et investi dans le travail demandé.
+
+
+| Branches                                                    | Responsable(s)                      |
+| ----------------------------------------------------------- | --------------------                |
+| **feat/env-setup** : environnement dev (Docker/DB, ports)   | Mathilde                            |
+| **feat/auth** : user + login + register                     | Mathilde                            |
+| **feat/posts-front** : pages accueil + liste + détail       |                                     |
+| **feat/comments** : ajout commentaire + signalement         |                                     |
+| **feat/admin** : backoffice (CRUD + modération)             |                                     |
+| **feat/contact** : formulaire contact + mail                |                                     |
+| Tests fonctionnels                                          |                                     |
+| Documentation : webographie + README.md                     | Mathilde                            |
 
 ## BRANCHE ``feat/env-setup``
 
