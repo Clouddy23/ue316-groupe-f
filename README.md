@@ -159,3 +159,20 @@ php bin/console make:registration-form
 > no
 ```
 
+### Réglage de la sécurité
+
+**Vérification dans config > packages > security.yaml :**
+- ``password_hashers`` pour ``User``
+- ``provider`` basé ``User`` + ``email`` 
+- ``firewall`` main avec : ``custom_authenticator``, ``logout``, ``rememeber_me``
+
+**Ajout d'un ``acces_control`` dans ``security.yaml`` pour un front public et un admin sécurisé :**
+```bash
+access_control:
+    - { path: ^/login, roles: PUBLIC_ACCESS }
+    - { path: ^/register, roles: PUBLIC_ACCESS }
+    - { path: ^/admin, roles: ROLE_ADMIN }
+```
+
+
+
