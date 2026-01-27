@@ -11,7 +11,7 @@ L’objectif principal de ce projet est de concevoir et développer une applicat
 
 ## Principe général de collaboration
 
-## Membres du groupe
+### Membres du groupe
 
 | Etudiant.e  |   Alias    |
 | :---------: | :--------: |
