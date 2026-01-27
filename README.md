@@ -174,5 +174,28 @@ access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
 ```
 
+### Configuration du fichier ``routes.yaml``
+
+**Chargement des controlleurs**
+```bash
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+```
+**Vider le cache**
+```bash
+php bin/console cache:clear
+```
+
+**Vérification des routes**
+```bash
+php bin/console debug:router
+```
+
+
 
 
