@@ -224,4 +224,26 @@ Adapter la syntaxe des contraintes de validation du formulaire d’inscription a
 ])
 ```
 
+### Ajout des liens Login/Register/Logout
+
+**Dans templates > base.html/twig :**
+- Ajout d'un bouton LOGOUT si connecté
+- Ajout des boutons LOGIN/REGISTER si non connecté
+
+```bash
+    <body>
+        <nav>
+        {% if app.user %}
+            <span>Connecté en tant que {{ app.user.email }}</span>
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Connexion</a>
+            <a href="{{ path('app_register') }}">Inscription</a>
+        {% endif %}
+        </nav>
+
+        {% block body %}{% endblock %}
+    </body>
+```
+
 
