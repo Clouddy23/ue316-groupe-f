@@ -26,6 +26,7 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 
 | Branche | Responsable(s) | Contenu |
 |---|---|---|
+| **mathilde** | Mathilde (S1)| installation de l'environnement, création et lancement du projet Symfony GitHub |
 | **feat/env-setup** | Mathilde | Mise en place environnement local : Docker PostgreSQL, `.env.local`, init DB, lancement Symfony |
 | **feat/auth** | Mathilde | Authentification : entité `User`, migrations, login, logout, register, configuration `security.yaml`, liens Twig |
 | **feat/admin** | Mathieu | Backoffice `/admin` : dashboard, CRUD Users, règles de sécurité (auto-protection admin, re-hash des mots de passe) |
@@ -34,14 +35,16 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 | **feat/posts-front** |  | Pages front : accueil, liste des posts, détail d’un post |
 | **feat/comments** |  | Commentaires : ajout, affichage, signalement |
 | **tests** |  | Tests fonctionnels |
-| **docs** | Mathilde, Filippos, Mathieu | README, documentation technique, webographie |
+| **docs** | Mathilde, Filippos, Mathieu | README, webographie |
 
 ### Calendrier de suivi du projet
 
-| Échéance | Objectif                                                                                                                                                                                  |
-| :------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  25/01   | Installation del’environnement de développement Symfony (IDE, serveur local, Composer/Symfony CLI) puis création et lancement du projet Symfony en local.                                 |
-|  01/02   | Mise en place de la BDD via .env, ajout de l’authentification, création de l’entité Post, génération du CRUD et installation/configuration d’un bundle d’administration (EasyAdmin)       |
+| Échéance | Objectif |
+| :------: | :--- |
+| 25/01 | Installation de l’environnement de développement Symfony (PHPStorm, serveur local, Composer/Symfony CLI) + Création et lancement du projet Symfony en local. |
+| 01/02 | Mise en place BDD/Docker PostgreSQL, ajout de l’authentification (login/logout/register, création des entités `User` et `Post`, génération du CRUD pour les 2 entités, installation/configuration bundle d’administration (EasyAdmin) avec accès sécurisé `/admin`, création du formulaire de contact avec envoi d’email, configuration SMTP (Mailpit) et Messenger en mode synchrone. |
+| 08/02 | Terminer entité `Post` (back + front), ajouter entité `Comment` (création + affichage + signalement), finaliser le formulaire contact (destinataire réel + validations), compléter la sécurité (droits/roles), démarrer les tests, mettre à jour de README |
+
 
 ## BRANCHE ``feat/env-setup``
 
