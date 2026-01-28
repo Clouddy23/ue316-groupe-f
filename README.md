@@ -24,19 +24,17 @@ L’objectif principal de ce projet est de concevoir et développer une applicat
 
 Chacun des membres du groupe a contribué au projet selon ses disponibilités et compétences, tout le monde s'est montré impliqué et investi dans le travail demandé.
 
-
 | Branche | Responsable(s) | Contenu |
 |---|---|---|
-| **feat/env-setup** | Mathilde | Mise en place environnement (ports, DB, config projet) |
-| **feat/auth** | Mathilde | Authentification : user, login, logout, register |
-| **feat/posts-back** | Kamo | Entité Post + migrations + endpoints/CRUD côté back |
-| **feat/posts-front** |  | Pages : accueil, liste des posts, détail d’un post |
-| **feat/comments** |  | Ajout de commentaires + signalement |
-| **feat/admin** | Mathieu | Backoffice `/admin` : dashboard, gestion CRUD entité User, règles de sécurité |
-| **feat/contact** | Filippos | Formulaire de contact + envoi mail (Mailer + SMTP + config Messenger en sync) |
+| **feat/env-setup** | Mathilde | Mise en place environnement local : Docker PostgreSQL, `.env.local`, init DB, lancement Symfony |
+| **feat/auth** | Mathilde | Authentification : entité `User`, migrations, login, logout, register, configuration `security.yaml`, liens Twig |
+| **feat/admin** | Mathieu | Backoffice `/admin` : dashboard, CRUD Users, règles de sécurité (auto-protection admin, re-hash des mots de passe) |
+| **feat/contact** | Filippos | Formulaire de contact + envoi mail (Mailer, SMTP/Mailpit, Messenger en synchrone) |
+| **feat/posts-back** | Kamo | Entité `Post`, migrations, CRUD et endpoints côté back |
+| **feat/posts-front** |  | Pages front : accueil, liste des posts, détail d’un post |
+| **feat/comments** |  | Commentaires : ajout, affichage, signalement |
 | **tests** |  | Tests fonctionnels |
-| **docs** | Mathilde, Filippos, Mathieu | README + webographie |
-
+| **docs** | Mathilde, Filippos, Mathieu | README, documentation technique, webographie |
 
 ### Calendrier de suivi du projet
 
