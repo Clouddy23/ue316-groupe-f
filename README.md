@@ -38,10 +38,10 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 
 ### Calendrier de suivi du projet
 
-| Échéance | Objectif                                                                                                                                                                                  |
-| :------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  25/01   | Installation del’environnement de développement Symfony (IDE, serveur local, Composer/Symfony CLI) puis création et lancement du projet Symfony en local.                                 |
-|  01/02   | Mise en place de la BDD via .env, ajout de l’authentification, création de l’entité Post, génération du CRUD et installation/configuration d’un bundle d’administration (EasyAdmin)       |
+| Échéance | Objectif                                                                                                                                                                            |
+| :------: |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  25/01   | Installation de l’environnement de développement Symfony (IDE, serveur local, Composer/Symfony CLI) puis création et lancement du projet Symfony en local.                          |
+|  01/02   | Mise en place de la BDD via .env, ajout de l’authentification, création de l’entité Post, génération du CRUD et installation/configuration d’un bundle d’administration (EasyAdmin) |
 
 ## BRANCHE ``feat/env-setup``
 
@@ -82,6 +82,28 @@ symfony serve -d
 ```
 
 Puis ouvrir : http://127.0.0.1:8000
+
+## Chargement des données
+Une fixture a été mise en place afin de charger facilement et rapidement des données exemples en base de données.
+Cela évite notamment de créer manuellement et plusieurs fois des Users, des Posts etc...
+
+Actuellement, cette fixture permet :
+* de créer un administrateur dont les identifiants sont :
+  * **email** : admin@example.com
+  * **mot de passe** : adminpass
+* de créer un utilisateur dont les identifiants sont
+  * **email** : user@example.com
+  * **mot de passe** : userpass
+
+Il est possible de rajouter la génération d'autres entités, comme Post, Comment etc.
+Pour la modifier, il suffit d'éditer ce fichier : `src/DataFixtures/AppFixtures.php`.
+
+Pour charger ces données dans votre base de données, il suffit d'éxécuter la commande suivante :
+```bash
+php bin/console doctrine:fixtures:load
+```
+
+_**⚠️ Attention** : le chargement d'une fixture purge la base de données. Toutes les données présentes dans votre BDD seront écrasées._
 
 ## BRANCHE ``feat/auth``
 
@@ -245,30 +267,33 @@ Adapter la syntaxe des contraintes de validation du formulaire d’inscription a
     </body>
 ```
 
-### Préparation d'un admin pour la future branche ``feat/admin``**
-
-**Création de l'admin**
-http://127.0.0.1:8000/register
-- email : admin@test.fr
-- mot de passe : !changeme!test
-
-**Passage de l'utilisateur admin en BDD**
-```bash
-docker compose exec database psql -U app -d app
-```
-
----
-
 ## BRANCHE ``feat/admin``
-Il faut commencer par l'ajout d'un utilisateur avec **ROLE_ADMIN** en base de données, en effet seuls les administrateurs peuvent accéder au backoffice (/admin).
+### Ajout de l'administrateur en base de données
+Il faut commencer par l'ajout d'un administrateur en base de données, en effet seuls les administrateurs peuvent accéder au backoffice.
 
-Pour se faire, il suffit de charger la fixture (`src/DataFixtures/AppFixtures.php`) en base de données, l'utilisateur sera crée automatiquement :
+Pour se faire, il suffit de charger la fixture (`src/DataFixtures/AppFixtures.php`) comme expliqué dans la partie **Chargement des données** :
 ```bash
 php bin/console doctrine:fixtures:load
 ```
 
-_**⚠️ Attention : le chargement d'une fixture purge la base de données.**_
 
-Les coordonnées de connexion sur le backoffice sont :
-- **email** : admin@example.com
-- **mot de passe** : adminpass
+### Accès au backoffice
+Les utilisateurs avec le rôle ROLE_ADMIN ont accès au backoffice. L'accès se fait via la route `/admin`, qui renvoi sur le dashboard du backoffice.
+
+### Fonctionnalités implémentées en backoffice
+
+Les fonctionnalités suivantes sont déjà implémentées :
+* **Dashboard** : aperçu rapide des informations, comme le nombre d'utilisateurs, le nombre d'administrateurs et le nombre de posts.
+* **La gestion des Users avec** :
+  * la possibilité de consulter la liste de tous les utilisateurs et leurs informations
+  * la possibilité d'éditer les informations des utilisateurs existants
+  * la possibilité de créer de nouveaux utilisateurs
+  * la possibilité de supprimer des utilisateurs
+
+Des **mesures de sécurités** ont également été implémentés :
+* L'administrateur actuellement connecté ne peut pas supprimer son propre compte
+* L'impossibilité de supprimer le dernier administrateur présent en base de données
+* Les mots de passe modifiés lors de l'édition d'un utilisateur sont re-hachés automatiquement
+* Lors de l'édition d'un mot de passe, impossible de voir le mot de passe défini précédemment
+
+D'autres fonctions restent à implémenter, selon l'avancée du projet.
