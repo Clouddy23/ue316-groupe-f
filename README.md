@@ -26,7 +26,7 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 
 | Branche | Responsable(s) | Contenu |
 |---|---|---|
-| **mathilde** | Mathilde (S1)| installation de l'environnement, création et lancement du projet Symfony GitHub |
+| **mathilde** | Mathilde (S1)| Installation de l'environnement, création et lancement du projet Symfony GitHub |
 | **feat/env-setup** | Mathilde | Mise en place environnement local : Docker PostgreSQL, `.env.local`, init DB, lancement Symfony |
 | **feat/auth** | Mathilde | Authentification : entité `User`, migrations, login, logout, register, configuration `security.yaml`, liens Twig |
 | **feat/admin** | Mathieu | Backoffice `/admin` : dashboard, CRUD Users, règles de sécurité (auto-protection admin, re-hash des mots de passe) |
