@@ -28,7 +28,7 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 | Branches                                                    | Responsable(s)                      |
 | ----------------------------------------------------------- | --------------------                |
 | **feat/env-setup** : environnement dev (Docker/DB, ports)   | Mathilde                            |
-| **feat/auth** : user + login + register                     | Mathilde                            |
+| **feat/auth** : user + login/logout + register              | Mathilde                            |
 | **feat/posts-front** : pages accueil + liste + détail       |                                     |
 | **feat/comments** : ajout commentaire + signalement         |                                     |
 | **feat/admin** : backoffice (CRUD + modération)             |                                     |
