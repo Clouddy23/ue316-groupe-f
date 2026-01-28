@@ -33,7 +33,7 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 | **feat/posts-front** |  | Pages : accueil, liste des posts, détail d’un post |
 | **feat/comments** |  | Ajout de commentaires + signalement |
 | **feat/admin** | Mathieu | Backoffice `/admin` : dashboard, gestion CRUD entité User, règles de sécurité |
-| **feat/contact** |  | Formulaire de contact + envoi mail (Mailer + SMTP + config Messenger en sync) |
+| **feat/contact** | Filippos | Formulaire de contact + envoi mail (Mailer + SMTP + config Messenger en sync) |
 | **tests** |  | Tests fonctionnels |
 | **docs** | Mathilde, Filippos, Mathieu | README + webographie |
 
