@@ -31,7 +31,7 @@ class DashboardController extends AbstractDashboardController
         return $this->render('admin/dashboard.html.twig', [
             'users_count' => $this->userRepository->count([]),
             'admins_count' => $this->userRepository->countAdmins(),
-            'posts_count' => 42, // Valeur "au pif" pour le moment
+            'posts_count' => 42,
         ]);
     }
 
