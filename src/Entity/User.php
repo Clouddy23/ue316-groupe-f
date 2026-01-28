@@ -34,6 +34,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    // Password for EasyAdmin dashboard
+    private ?string $plainPassword = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -84,6 +87,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * Getter for "role" in EasyAdmin
+     */
+    public function getRole(): string
+    {
+        return in_array('ROLE_ADMIN', $this->roles) ? 'ROLE_ADMIN' : 'ROLE_USER';
+    }
+
+    /**
+     * Setter for "role" in EasyAdmin
+     */
+    public function setRole(?string $role): self
+    {
+        $this->roles = ($role === 'ROLE_ADMIN') ? ['ROLE_ADMIN'] : [];
+        return $this;
+    }
+
+    /**
      * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): ?string
@@ -98,6 +118,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    // Getter for EasyAdmin dashboard
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    // Setter for EasyAdmin dashboard
+    public function setPlainPassword(?string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+
     /**
      * Ensure the session doesn't contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.
      */
@@ -105,7 +138,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $data = (array) $this;
         $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
-        
+
         return $data;
     }
 }

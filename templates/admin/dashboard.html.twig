@@ -1,0 +1,39 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Dashboard{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <div class="row">
+            {# Card: Total Users #}
+            <div class="col-md-6 col-xl-3">
+                <div class="card bg-info text-white mb-3">
+                    <div class="card-header"><i class="fas fa-users"></i> Total users</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ users_count }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            {# Card: Total Admins #}
+            <div class="col-md-6 col-xl-3">
+                <div class="card bg-warning text-dark mb-3">
+                    <div class="card-header"><i class="fas fa-user-shield"></i> Administrators</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ admins_count }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            {# Card: Posts #}
+            <div class="col-md-6 col-xl-3">
+                <div class="card bg-danger text-white mb-3">
+                    <div class="card-header"><i class="fas fa-newspaper"></i> Posts</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ posts_count }} (fake value)</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

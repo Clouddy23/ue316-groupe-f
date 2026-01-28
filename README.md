@@ -25,16 +25,16 @@ L’objectif principal de ce projet est de concevoir et développer une applicat
 Chacun des membres du groupe a contribué au projet selon ses disponibilités et compétences, tout le monde s'est montré impliqué et investi dans le travail demandé.
 
 
-| Branches                                                    | Responsable(s)                      |
-| ----------------------------------------------------------- | --------------------                |
-| **feat/env-setup** : environnement dev (Docker/DB, ports)   | Mathilde                            |
-| **feat/auth** : user + login + register                     | Mathilde                            |
-| **feat/posts-front** : pages accueil + liste + détail       |                                     |
-| **feat/comments** : ajout commentaire + signalement         |                                     |
-| **feat/admin** : backoffice (CRUD + modération)             |                                     |
-| **feat/contact** : formulaire contact + mail                |                                     |
-| Tests fonctionnels                                          |                                     |
-| Documentation : webographie + README.md                     | Mathilde                            |
+| Branches                                                    | Responsable(s) |
+| ----------------------------------------------------------- |----------------|
+| **feat/env-setup** : environnement dev (Docker/DB, ports)   | Mathilde       |
+| **feat/auth** : user + login + register                     | Mathilde       |
+| **feat/posts-front** : pages accueil + liste + détail       |                |
+| **feat/comments** : ajout commentaire + signalement         |                |
+| **feat/admin** : backoffice (CRUD + modération)             | Mathieu        |
+| **feat/contact** : formulaire contact + mail                |                |
+| Tests fonctionnels                                          |                |
+| Documentation : webographie + README.md                     | Mathilde       |
 
 ### Calendrier de suivi du projet
 
@@ -257,5 +257,18 @@ http://127.0.0.1:8000/register
 docker compose exec database psql -U app -d app
 ```
 
+---
 
+## BRANCHE ``feat/admin``
+Il faut commencer par l'ajout d'un utilisateur avec **ROLE_ADMIN** en base de données, en effet seuls les administrateurs peuvent accéder au backoffice (/admin).
 
+Pour se faire, il suffit de charger la fixture (`src/DataFixtures/AppFixtures.php`) en base de données, l'utilisateur sera crée automatiquement :
+```bash
+php bin/console doctrine:fixtures:load
+```
+
+_**⚠️ Attention : le chargement d'une fixture purge la base de données.**_
+
+Les coordonnées de connexion sur le backoffice sont :
+- **email** : admin@example.com
+- **mot de passe** : adminpass
