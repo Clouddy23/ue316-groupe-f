@@ -34,7 +34,7 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 | **feat/admin** : backoffice (CRUD + modération)             |                                     |
 | **feat/contact** : formulaire contact + mail                |                                     |
 | Tests fonctionnels                                          |                                     |
-| Documentation : webographie + README.md                     | Mathilde                            |
+| Documentation : webographie + README.md                     | Tous les membres                    |
 
 ### Calendrier de suivi du projet
 
