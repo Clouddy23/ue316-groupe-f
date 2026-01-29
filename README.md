@@ -1,6 +1,7 @@
 # UEL316 - Application web d’actualités avec Symfony 7
 
 ## Objectifs
+
 L’objectif principal de ce projet est de concevoir et développer une application web dynamique sans recours à un CMS, en utilisant le **framework Symfony 7**, afin de répondre aux besoins d’un client souhaitant disposer d’un site d’actualités moderne et administrable.
 
 - [x] Mettre en œuvre une **architecture MVC** propre et structurée avec Symfony.
@@ -46,28 +47,33 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 | 08/02 | Terminer entité `Post` (front), ajouter entité `Comment` (création + affichage + signalement), finaliser le formulaire contact (destinataire réel + validations), compléter la sécurité (droits/roles), démarrer les tests, mettre à jour de README |
 
 
-## BRANCHE ``feat/env-setup``
+## BRANCHE `feat/env-setup`
 
 La base PostgreSQL est lancée en local via Docker (volume local).  
 Chaque membre doit donc initialiser sa propre base sur sa machine.
 
-### Prérequis : 
+### Prérequis :
+
 - PHP + Composer
 - Docker Desktop
 
 ### Installation des dépendances PHP
+
 ```bash
 composer install
 ```
 
 ### Lancement de PostgreSQL
+
 ```bash
 docker compose up -d
 docker compose ps
 ```
+
 PostgreSQL est en local sur 127.0.0.1:5432
 
 ### Configuration de la BDD dans Symfony (local)
+
 Créarion d'un fichier .env.local à la racine (à mettre dans .gitignore)
 
 ```bash
@@ -75,32 +81,37 @@ DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&ch
 ```
 
 ### Initialisation de la BDD
+
 ```bash
 php bin/console doctrine:database:create
 ```
 
 ### Lancement du serveur Symfony
+
 ```bash
 symfony serve -d
 ```
 
 Puis ouvrir : http://127.0.0.1:8000
 
-## BRANCHE ``feat/auth``
+## BRANCHE `feat/auth`
 
 ### Vérification de l'environnement
+
 ```bash
 docker compose up -d
 docker compose ps
 ```
 
 ### Installation des dépendances
+
 ```bash
 composer require symfony/security-bundle symfony/twig-bundle symfony/validator
 composer require --dev symfony/maker-bundle
 ```
 
-### Création de l'entité ``User``
+### Création de l'entité `User`
+
 ```bash
 php bin/console make:user
 
@@ -109,7 +120,9 @@ php bin/console make:user
 •	Enter a property name that will be the unique "display" name for the user (e.g. email, username, uuid) [email]: > email
 •	Does this app need to hash/check user passwords? (yes/no) [yes]: > yes
 ```
-### Migration de ``User`` & Création tables
+
+### Migration de `User` & Création tables
+
 ```bash
 php bin/console make:migration
 php bin/console doctrine:migrations:migrate
@@ -119,6 +132,7 @@ php bin/console doctrine:migrations:migrate
 ```
 
 ### Génération de la page de connexion
+
 ```bash
 php bin/console make:auth
 
@@ -146,6 +160,7 @@ php bin/console make:auth
 ```
 
 ### Génération de la page d'inscription
+
 ```bash
 php bin/console make:registration-form
 
@@ -165,11 +180,13 @@ php bin/console make:registration-form
 ### Réglage de la sécurité
 
 **Vérification dans config > packages > security.yaml :**
-- ``password_hashers`` pour ``User``
-- ``provider`` basé ``User`` + ``email`` 
-- ``firewall`` main avec : ``custom_authenticator``, ``logout``, ``rememeber_me``
 
-**Ajout d'un ``acces_control`` dans ``security.yaml`` pour un front public et un admin sécurisé :**
+- `password_hashers` pour `User`
+- `provider` basé `User` + `email`
+- `firewall` main avec : `custom_authenticator`, `logout`, `rememeber_me`
+
+**Ajout d'un `acces_control` dans `security.yaml` pour un front public et un admin sécurisé :**
+
 ```bash
 access_control:
     - { path: ^/login, roles: PUBLIC_ACCESS }
@@ -177,9 +194,10 @@ access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
 ```
 
-### Configuration du fichier ``routes.yaml``
+### Configuration du fichier `routes.yaml`
 
 **Chargement des controlleurs**
+
 ```bash
 controllers:
     resource: ../src/Controller/
@@ -189,17 +207,21 @@ index:
     path: /
     controller: App\Controller\DefaultController::index
 ```
+
 **Vider le cache**
+
 ```bash
 php bin/console cache:clear
 ```
 
 **Vérification des routes**
+
 ```bash
 php bin/console debug:router
 ```
 
-### Adaptation à la syntaxe Symfony 7 du fichier ``RegistrationFormType.php``
+### Adaptation à la syntaxe Symfony 7 du fichier `RegistrationFormType.php`
+
 Adapter la syntaxe des contraintes de validation du formulaire d’inscription aux pratiques de Symfony 7, en remplaçant l’ancienne configuration par tableaux par l’utilisation des arguments nommés.
 
 ```bash
@@ -227,7 +249,7 @@ Adapter la syntaxe des contraintes de validation du formulaire d’inscription a
 ])
 ```
 
-### Ajout des liens Login/Register/Logout dans templates > base.html/twig**
+### Ajout des liens Login/Register/Logout dans templates > base.html/twig\*\*
 
 - Ajout d'un bouton LOGOUT si connecté
 - Ajout des boutons LOGIN/REGISTER si non connecté
@@ -248,17 +270,70 @@ Adapter la syntaxe des contraintes de validation du formulaire d’inscription a
     </body>
 ```
 
-### Préparation d'un admin pour la future branche ``feat/admin``**
+### Préparation d'un admin pour la future branche `feat/admin`\*\*
 
 **Création de l'admin**
 http://127.0.0.1:8000/register
+
 - email : admin@test.fr
 - mot de passe : !changeme!test
 
 **Passage de l'utilisateur admin en BDD**
+
 ```bash
 docker compose exec database psql -U app -d app
 ```
 
+## BRANCHE `feat/contact`
 
+L'objectif de cette branche est de créer un formulaire de contact par mail. Les commandes suivantes ont été utilisées pour créer à la fois le contrôleur et le formulaire :
 
+```bash
+php bin/console make:controller ContactController
+php bin/console make:form ContactFormType
+```
+
+Nous avons ensuite rédigé le contrôleur du formulaire :
+
+```php
+#[Route('/contact', name: 'app_contact')]
+    public function contact(Request $request, MailerInterface $mailer): Response
+    {
+        $form = $this->createForm(ContactFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $email = (new Email())
+                ->from('no-reply@siteclient')
+                ->replyTo($data['email'])
+                ->to('admin@example.com') // A changer avec mail du client
+                ->subject($data['subject'])
+                ->text(
+                    "Name: ".$data['name']."\n".
+                    "Email: ".$data['email']."\n".
+                    "Message: \n".$data['message']
+                );
+
+            $mailer->send($email);
+
+            $this->addFlash('success', 'Your message has been sent!');
+            return $this->redirectToRoute('app_contact');
+        }
+
+        return $this->render('contact/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+```
+
+Dans l'`env.dev`que nous avons ajouté l'adresse du service SMTP utilisé par le serveur Symfony : `MAILER_DSN=smtp://127.0.0.1:1025`
+
+Pour finir, afin que les mails soient envoyés directement à des fins de test dès la soumission du formulaire et sans être mis en file d'attente, nous avons modifié le fichier `messenger.yaml` pour permettre l'envoi synchrone :
+
+- nous avons décommenté : `sync: 'sync://'`
+- et modifié : `Symfony\Component\Mailer\Messenger\SendEmailMessage: async` en `Symfony\Component\Mailer\Messenger\SendEmailMessage: sync`
+
+Nous avons ensuite à des fins de test, rempli le formulaire et envoyé le message.
+
+![Mailpit](/docs/mailpit.png)
