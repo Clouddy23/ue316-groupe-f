@@ -19,10 +19,11 @@ class PostType extends AbstractType
             ->add('publishedAt', null, [
                 'widget' => 'single_text'
             ])
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+            // Retiré pour que l'auteur soit automatiquement l'utilisateur connecté
+            // ->add('author', EntityType::class, [
+            //     'class' => User::class,
+            //     'choice_label' => 'id',
+            // ])
         ;
     }
 
