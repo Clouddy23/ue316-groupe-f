@@ -25,17 +25,17 @@ L’objectif principal de ce projet est de concevoir et développer une applicat
 
 Chacun des membres du groupe a contribué au projet selon ses disponibilités et compétences, tout le monde s'est montré impliqué et investi dans le travail demandé.
 
-| Branche | Responsable(s) | Contenu |
-|---|---|---|
-| **mathilde** | Mathilde (S1)| Installation de l'environnement, création et lancement du projet Symfony GitHub |
-| **feat/env-setup** | Mathilde | Mise en place environnement local (Docker PostgreSQL, `.env.local`, init DB) |
-| **feat/auth** | Mathilde | Authentification (création de l'entité `User`, migrations, login/logout, register, configuration `security.yaml`, liens Twig) |
-| **feat/admin** | Mathieu | Backoffice `/admin` (dashboard, CRUD Users, règles de sécurité avec auto-protection admin, re-hash des mots de passe) |
-| **feat/contact** | Filippos | Page contact (formulaire de contact + envoi mail avec Mailer, SMTP/Mailpit, Messenger en synchrone) |
-| **feat/posts-back** | Kamo | Publications backend (création de l'entité `Post`, migrations, CRUD et endpoints) |
-| **feat/posts-front** |  | Publications frontend (accueil, liste des posts, détail d’un post) |
-| **feat/comments** |  | Commentaires (création de l'entité `Comment`, ajout, affichage, signalement) |
-| **tests** |  | Tests fonctionnels |
+| Branche | Responsable(s)              | Contenu |
+|---|-----------------------------|---|
+| **mathilde** | Mathilde (S1)               | Installation de l'environnement, création et lancement du projet Symfony GitHub |
+| **feat/env-setup** | Mathilde                    | Mise en place environnement local (Docker PostgreSQL, `.env.local`, init DB) |
+| **feat/auth** | Mathilde                    | Authentification (création de l'entité `User`, migrations, login/logout, register, configuration `security.yaml`, liens Twig) |
+| **feat/admin** | Mathieu                     | Backoffice `/admin` (dashboard, CRUD Users, règles de sécurité avec auto-protection admin, re-hash des mots de passe) |
+| **feat/contact** | Filippos                    | Page contact (formulaire de contact + envoi mail avec Mailer, SMTP/Mailpit, Messenger en synchrone) |
+| **feat/posts-back** | Kamo                        | Publications backend (création de l'entité `Post`, migrations, CRUD et endpoints) |
+| **feat/posts-front** | Mathieu                     | Publications frontend (accueil, liste des posts, détail d’un post) |
+| **feat/comments** |                             | Commentaires (création de l'entité `Comment`, ajout, affichage, signalement) |
+| **tests** |                             | Tests fonctionnels |
 | **docs** | Mathilde, Filippos, Mathieu | README, webographie |
 
 ### Calendrier de suivi du projet
