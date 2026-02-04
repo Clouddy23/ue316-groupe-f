@@ -312,7 +312,13 @@ Les fonctionnalités suivantes sont déjà implémentées :
     * la possibilité d'éditer les informations des utilisateurs existants
     * la possibilité de créer de nouveaux utilisateurs
     * la possibilité de supprimer des utilisateurs
-
+  
+* **La gestion des Posts avec** :
+    * la possibilité de consulter la liste de tous les posts
+    * la possibilité d'éditer les posts existants
+    * la possibilité de créer de nouveaux posts
+    * la possibilité de supprimer des posts
+  
 Des **mesures de sécurités** ont également été implémentés :
 * L'administrateur actuellement connecté ne peut pas supprimer son propre compte
 * L'impossibilité de supprimer le dernier administrateur présent en base de données
