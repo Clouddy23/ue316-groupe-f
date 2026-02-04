@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User;
+use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
@@ -24,11 +25,29 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            BeforeEntityPersistedEvent::class => ['hashPassword'],
+            BeforeEntityPersistedEvent::class => [
+                ['hashPassword'],
+                ['setPostDefaults'],
+            ],
             BeforeEntityUpdatedEvent::class => ['hashPassword'],
             BeforeEntityDeletedEvent::class => ['preventDelete'],
         ];
     }
+
+    public function setPostDefaults(BeforeEntityPersistedEvent $event): void
+    {
+        $entity = $event->getEntityInstance();
+
+        if ($entity instanceof Post) {
+            if ($entity->getAuthor() === null) {
+                $entity->setAuthor($this->security->getUser());
+            }
+            if ($entity->getPublishedAt() === null) {
+                $entity->setPublishedAt(new \DateTimeImmutable());
+            }
+        }
+    }
+
 
     public function hashPassword($event): void
     {

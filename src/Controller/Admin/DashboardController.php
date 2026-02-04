@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Post;
 use App\Entity\User;
+use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Exception;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -17,7 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
 {
-    public function __construct(private readonly UserRepository $userRepository)
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly PostRepository $postRepository
+    )
     {
     }
 
@@ -31,7 +36,7 @@ class DashboardController extends AbstractDashboardController
         return $this->render('admin/dashboard.html.twig', [
             'users_count' => $this->userRepository->count([]),
             'admins_count' => $this->userRepository->countAdmins(),
-            'posts_count' => 42,
+            'posts_count' => $this->postRepository->count([]),
         ]);
     }
 
@@ -45,7 +50,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
-        // yield MenuItem::linkToCrud('Posts', 'fas fa-newspaper', Post::class);
+        yield MenuItem::linkToCrud('Posts', 'fas fa-newspaper', Post::class);
 
     }
 }
