@@ -14,10 +14,21 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('content')
+            ->add('title', null, [
+                'label' => 'Title',
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Enter the title here...'],
+                'label_attr' => ['class' => 'form-label fw-bold']
+            ])
+            ->add('content', null, [
+                'label' => 'Content',
+                'attr' => ['class' => 'form-control', 'rows' => 10, 'placeholder' => 'Write your content here....'],
+                'label_attr' => ['class' => 'form-label fw-bold mt-3']
+            ])
             ->add('publishedAt', null, [
-                'widget' => 'single_text'
+                'label' => 'Publication date',
+                'widget' => 'single_text',
+                'attr' => ['class' => 'form-control'],
+                'label_attr' => ['class' => 'form-label fw-bold mt-3']
             ])
             // Retiré pour que l'auteur soit automatiquement l'utilisateur connecté
             // ->add('author', EntityType::class, [

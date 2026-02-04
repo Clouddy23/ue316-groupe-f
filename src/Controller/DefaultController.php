@@ -1,19 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Richard
- * Date: 18/10/2019
- * Time: 13:43
- */
-
 namespace App\Controller;
 
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends AbstractController
 {
-    public function index(){
-        return $this->render('Default/index.html.twig');
+    public function index(PostRepository $postRepository): Response
+    {
+        return $this->render('Default/index.html.twig', [
+            'posts' => $postRepository->findBy([], ['publishedAt' => 'DESC'], 3),
+        ]);
     }
 
 }
