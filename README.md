@@ -34,7 +34,8 @@ Chacun des membres du groupe a contribué au projet selon ses disponibilités et
 | **feat/contact** | Filippos                    | Page contact (formulaire de contact + envoi mail avec Mailer, SMTP/Mailpit, Messenger en synchrone) |
 | **feat/posts-back** | Kamo                        | Publications backend (création de l'entité `Post`, migrations, CRUD et endpoints) |
 | **feat/posts-front** | Mathieu                     | Publications frontend (accueil, liste des posts, détail d’un post) |
-| **feat/comments** |                             | Commentaires (création de l'entité `Comment`, ajout, affichage, signalement) |
+| **feat/comments** | Kamo                            | Commentaires (création de l'entité `Comment`, ajout, affichage, signalement) |
+| **feat/posts-images**| Kamo                         | Gestion complète des images (Upload avec VichUploader, redimensionnement, affichage conditionnel) |
 | **tests** |                             | Tests fonctionnels |
 | **docs** | Mathilde, Filippos, Mathieu | README, webographie |
 
