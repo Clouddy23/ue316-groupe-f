@@ -1,64 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Post{% endblock %}
+{% block title %}Post
+{% endblock %}
 
 {% block body %}
-    <h1>Post</h1>
+	<h1>Post</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ post.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ post.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ post.content }}</td>
-            </tr>
-            <tr>
-                <th>PublishedAt</th>
-                <td>{{ post.publishedAt ? post.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ post.id }}</td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td>{{ post.title }}</td>
+			</tr>
+			<tr>
+				<th>Content</th>
+				<td>{{ post.content }}</td>
+			</tr>
+			<tr>
+				<th>PublishedAt</th>
+				<td>{{ post.publishedAt ? post.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_post_index') }}">back to list</a>
+	<a href="{{ path('app_post_index') }}">back to list</a>
 
-    <a href="{{ path('app_post_edit', {'id': post.id}) }}">edit</a>
+	<a href="{{ path('app_post_edit', {'id': post.id}) }}">edit</a>
 
-    {{ include('post/_delete_form.html.twig') }}
-    <hr>
-    <h3>Commentaires</h3>
-    {% if app.user %}
-        <div style="margin-bottom: 20px; padding: 15px; background: #f9f9f9; border: 1px solid #ddd;">
-            {{ form_start(commentForm) }}
-                {{ form_row(commentForm.content, {'label': 'Votre message'}) }}
-                <button class="btn">Envoyer</button>
-            {{ form_end(commentForm) }}
-        </div>
-    {% else %}
-        <p><em>Connectez-vous pour commenter.</em></p>
-    {% endif %}
+	{{ include('post/_delete_form.html.twig') }}
+	<hr>
+	<h3>Commentaires</h3>
+	{% if app.user %}
+		<div style="margin-bottom: 20px; padding: 15px; background: #f9f9f9; border: 1px solid #ddd;">
+			{{ form_start(commentForm) }}
+			{{ form_row(commentForm.content, {'label': 'Votre message'}) }}
+			<button class="btn">Envoyer</button>
+			{{ form_end(commentForm) }}
+		</div>
+	{% else %}
+		<p>
+			<em>Connectez-vous pour commenter.</em>
+		</p>
+	{% endif %}
 
-    <div class="comments-list">
-        {% for comment in post.comments %}
-<div style="border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 10px;">
-                <strong>{{ comment.author.email }}</strong> 
-                <small style="color: grey;">le {{ comment.createdAt|date('d/m/Y H:i') }}</small>
-                {% if app.user and not comment.isFlagged %}
-                    <a href="{{ path('app_comment_flag', {'id': comment.id}) }}" style="color: red; font-size: 0.8em; margin-left: 10px;">(Signaler)</a>
-                {% elseif comment.isFlagged %}
-                    <span style="color: orange; font-size: 0.8em; margin-left: 10px;">(Signalé à la modération)</span>
-                {% endif %}
+	<div class="comments-list">
+		{% for comment in post.comments %}
+			<div style="border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 10px;">
+				<strong>{{ comment.author.email }}</strong>
+				<small style="color: grey;">le
+					{{ comment.createdAt|date('d/m/Y H:i') }}</small>
+				{% if app.user and not comment.isFlagged %}
+					<a href="{{ path('app_comment_flag', {'id': comment.id}) }}" style="color: red; font-size: 0.8em; margin-left: 10px;">(Signaler)</a>
+				{% elseif comment.isFlagged %}
+					<span style="color: orange; font-size: 0.8em; margin-left: 10px;">(Signalé à la modération)</span>
+				{% endif %}
 
-                <p>{{ comment.content }}</p>
-            </div>
-        {% else %}
-            <p>Aucun commentaire pour l'instant.</p>
-        {% endfor %}
-    </div>
+				<p>{{ comment.content }}</p>
+			</div>
+		{% else %}
+			<p>Aucun commentaire pour l'instant.</p>
+		{% endfor %}
+	</div>
 {% endblock %}
