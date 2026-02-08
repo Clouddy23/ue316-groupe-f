@@ -85,4 +85,4 @@ Les fixtures créent :
 
 Voici le diagramme de classes utilisé pour implémenter ce site web :
 
-![diagrammeClasses](/out/docs/diagramme-classes/)
+![diagrammeClasses](/out/docs/diagramme-classes/Diagramme%20de%20classes%20-%20Evergreen.png)
