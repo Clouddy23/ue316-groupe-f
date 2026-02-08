@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use App\Entity\Comment;
+use App\Form\CommentType;
 
 #[Route('/post')]
 final class PostController extends AbstractController
@@ -48,11 +50,30 @@ final class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}', name: 'app_post_show', methods: ['GET'])]
-    public function show(#[MapEntity(mapping: ['slug' => 'slug'])] Post $post): Response
-    {
+    #[Route('/{slug}', name: 'app_post_show', methods: ['GET', 'POST'])]
+    public function show(
+        #[MapEntity(mapping: ['slug' => 'slug'])] Post $post,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setPost($post);
+            $comment->setAuthor($this->getUser());
+            $comment->setCreatedAt(new \DateTimeImmutable());
+            $comment->setIsFlagged(false);
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_post_show', ['slug' => $post->getSlug()]);
+        }
+
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'commentForm' => $form,
         ]);
     }
 
@@ -83,7 +104,7 @@ final class PostController extends AbstractController
     #[Route('/{id}', name: 'app_post_delete', methods: ['POST'])]
     public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($post);
             $entityManager->flush();
         }
