@@ -134,4 +134,13 @@ final class PostController extends AbstractController
             $i++;
         }
     }
+
+    #[Route('/comment/{id}/flag', name: 'app_comment_flag', methods: ['GET'])]
+    public function flag(Comment $comment, EntityManagerInterface $entityManager): Response
+    {
+        $comment->setIsFlagged(true);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_post_show', ['slug' => $comment->getPost()->getSlug()]);
+    }
 }

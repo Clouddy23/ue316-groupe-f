@@ -46,9 +46,15 @@
 
     <div class="comments-list">
         {% for comment in post.comments %}
-            <div style="border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 10px;">
+<div style="border-bottom: 1px solid #eee; margin-bottom: 10px; padding-bottom: 10px;">
                 <strong>{{ comment.author.email }}</strong> 
                 <small style="color: grey;">le {{ comment.createdAt|date('d/m/Y H:i') }}</small>
+                {% if app.user and not comment.isFlagged %}
+                    <a href="{{ path('app_comment_flag', {'id': comment.id}) }}" style="color: red; font-size: 0.8em; margin-left: 10px;">(Signaler)</a>
+                {% elseif comment.isFlagged %}
+                    <span style="color: orange; font-size: 0.8em; margin-left: 10px;">(Signalé à la modération)</span>
+                {% endif %}
+
                 <p>{{ comment.content }}</p>
             </div>
         {% else %}
