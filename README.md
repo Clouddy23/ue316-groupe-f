@@ -67,9 +67,6 @@ Le SGBD choisi pour le développement est _SQLite_ parce qu'il permet de partage
 Pour créer la base de données et charger les données de test, exécutez les commandes suivantes :
 
 ```bash
-# Créer la base de données
-php bin/console doctrine:database:create
-
 # Exécuter les migrations pour créer les tables
 php bin/console doctrine:migrations:migrate
 
