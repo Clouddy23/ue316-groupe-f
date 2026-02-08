@@ -1,0 +1,39 @@
+{% extends 'admin/base.html.twig' %}
+{% set active_tab = 'users' %}
+
+{% block title %}Nouvel utilisateur - Admin{% endblock %}
+
+{% block admin_content %}
+<h2>👤 Créer un utilisateur</h2>
+
+<div class="card mt-4" style="max-width: 500px;">
+    <div class="card-body">
+        <form method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required placeholder="utilisateur@exemple.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" class="form-control" required minlength="6" placeholder="Minimum 6 caractères">
+            </div>
+            
+            <div class="form-group">
+                <label for="role">Rôle</label>
+                <select id="role" name="role" class="form-control">
+                    <option value="user">Utilisateur</option>
+                    <option value="admin">Administrateur</option>
+                </select>
+            </div>
+            
+            <input type="hidden" name="_token" value="{{ csrf_token('new_user') }}">
+            
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{{ path('admin_users') }}" class="btn btn-secondary">← Retour</a>
+                <button type="submit" class="btn btn-success">Créer l'utilisateur</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

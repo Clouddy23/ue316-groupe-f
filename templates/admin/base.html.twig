@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container py-4">
+    <h1 class="text-success mb-4">🔧 Administration</h1>
+
+    <!-- Onglets -->
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a class="nav-link {% if active_tab is defined and active_tab == 'posts' %}active{% endif %}" href="{{ path('admin_posts') }}">
+                📝 Articles
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if active_tab is defined and active_tab == 'comments' %}active{% endif %}" href="{{ path('admin_comments') }}">
+                💬 Commentaires
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if active_tab is defined and active_tab == 'users' %}active{% endif %}" href="{{ path('admin_users') }}">
+                👥 Utilisateurs
+            </a>
+        </li>
+    </ul>
+
+    <!-- Flash messages -->
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {% block admin_content %}{% endblock %}
+
+    <a href="{{ path('index') }}" class="btn btn-outline-success mt-4">← Retour au site</a>
+</div>
+{% endblock %}

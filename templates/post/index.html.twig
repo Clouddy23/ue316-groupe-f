@@ -1,39 +1,98 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Post index{% endblock %}
+{% block title %}Actualités - Evergreen{% endblock %}
 
 {% block body %}
-    <h1>Post index</h1>
+<div class="container py-5">
+    {# Header #}
+    <div class="text-center mb-5">
+        <h1 class="text-success font-weight-bold">📰 Actualités</h1>
+        <p class="text-muted lead">Restez informé des dernières nouvelles écologiques</p>
+        <p class="text-muted">{{ total }} article{{ total > 1 ? 's' : '' }} au total</p>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>PublishedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    {# Posts List #}
+    <div class="row">
         {% for post in posts %}
-            <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.content }}</td>
-                <td>{{ post.publishedAt ? post.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_post_show', {'slug': post.slug}) }}">show</a>
-                    <a href="{{ path('app_post_edit', {'id': post.id}) }}">edit</a>
-                </td>
-            </tr>
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center py-2">
+                        <small>📅 {{ post.publishedAt|date('d/m/Y') }}</small>
+                        <small>Par {{ post.author.email }}</small>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title font-weight-bold">{{ post.title }}</h4>
+                        <p class="card-text text-muted">
+                            {{ post.content|slice(0, 200) }}{% if post.content|length > 200 %}...{% endif %}
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">
+                        <a href="{{ path('app_post_show', {'slug': post.slug}) }}" class="btn btn-success">
+                            Lire la suite →
+                        </a>
+                        <small class="text-muted">
+                            💬 {{ post.comments|length }} commentaire{{ post.comments|length > 1 ? 's' : '' }}
+                        </small>
+                    </div>
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+            <div class="col-12">
+                <div class="card shadow-sm border-0 p-5 text-center">
+                    <p class="text-muted mb-0">Aucun article pour le moment.</p>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 
-    <a href="{{ path('app_post_new') }}">Create new</a>
+    {# Pagination #}
+    {% if totalPages > 1 %}
+        <nav aria-label="Pagination des actualités" class="mt-5">
+            <ul class="pagination justify-content-center">
+                {# Previous #}
+                <li class="page-item {% if currentPage == 1 %}disabled{% endif %}">
+                    <a class="page-link" href="{{ path('app_post_index', {'page': currentPage - 1}) }}" aria-label="Précédent">
+                        <span aria-hidden="true">«</span> Précédent
+                    </a>
+                </li>
+                
+                {# Page numbers #}
+                {% for i in 1..totalPages %}
+                    {% if i == currentPage %}
+                        <li class="page-item active" aria-current="page">
+                            <span class="page-link bg-success border-success">{{ i }}</span>
+                        </li>
+                    {% elseif i >= currentPage - 2 and i <= currentPage + 2 %}
+                        <li class="page-item">
+                            <a class="page-link text-success" href="{{ path('app_post_index', {'page': i}) }}">{{ i }}</a>
+                        </li>
+                    {% elseif i == 1 or i == totalPages %}
+                        <li class="page-item">
+                            <a class="page-link text-success" href="{{ path('app_post_index', {'page': i}) }}">{{ i }}</a>
+                        </li>
+                    {% elseif i == currentPage - 3 or i == currentPage + 3 %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {# Next #}
+                <li class="page-item {% if currentPage == totalPages %}disabled{% endif %}">
+                    <a class="page-link" href="{{ path('app_post_index', {'page': currentPage + 1}) }}" aria-label="Suivant">
+                        Suivant <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <p class="text-center text-muted">
+            Page {{ currentPage }} sur {{ totalPages }}
+        </p>
+    {% endif %}
+
+    {# Back to home #}
+    <div class="text-center mt-4">
+        <a href="{{ path('index') }}" class="btn btn-outline-success">← Retour à l'accueil</a>
+    </div>
+</div>
 {% endblock %}

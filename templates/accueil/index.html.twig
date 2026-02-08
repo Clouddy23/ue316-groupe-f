@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Evergreen{% endblock %}
+
+{% block body %}
+    {# Hero Section #}
+    <div class="jumbotron jumbotron-fluid bg-success text-white mb-0" style="background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="display-3 font-weight-bold">🌿 Evergreen</h1>
+                    <p class="lead mb-4" style="font-size: 1.4rem;">Votre partenaire pour un avenir durable</p>
+                    <p class="mb-4" style="font-size: 1.1rem; opacity: 0.95;">
+                        Evergreen se spécialise dans les solutions innovantes de réduction de l'empreinte carbone. 
+                        Nous accompagnons les entreprises et les particuliers dans leur transition écologique.
+                    </p>
+                    <div class="mt-4">
+                        <a href="{{ path('app_about') }}" class="btn btn-light btn-lg mr-3 mb-2">
+                            En savoir plus
+                        </a>
+                        <a href="{{ path('app_contact') }}" class="btn btn-outline-light btn-lg mb-2">
+                            Nous contacter
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center d-none d-lg-block">
+                    <span style="font-size: 8rem;">🌍</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Services Section #}
+    <div class="container my-5">
+        <h2 class="text-center mb-2 text-success font-weight-bold">Nos Services</h2>
+        <p class="text-center text-muted mb-5">Des solutions complètes pour votre transition écologique</p>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <span style="font-size: 3rem;">📊</span>
+                        </div>
+                        <h5 class="card-title text-success font-weight-bold">Audit Carbone</h5>
+                        <p class="card-text text-muted">Analysez votre empreinte carbone avec nos outils de diagnostic précis et obtenez un rapport détaillé.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <span style="font-size: 3rem;">💡</span>
+                        </div>
+                        <h5 class="card-title text-success font-weight-bold">Conseil Stratégique</h5>
+                        <p class="card-text text-muted">Bénéficiez de recommandations personnalisées pour réduire vos émissions de manière efficace.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <span style="font-size: 3rem;">📈</span>
+                        </div>
+                        <h5 class="card-title text-success font-weight-bold">Suivi & Reporting</h5>
+                        <p class="card-text text-muted">Suivez vos progrès avec nos tableaux de bord interactifs et rapports détaillés.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Stats Banner #}
+    <div class="bg-light py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-6 mb-4 mb-md-0">
+                    <h2 class="text-success font-weight-bold mb-0">500+</h2>
+                    <p class="text-muted mb-0">Clients accompagnés</p>
+                </div>
+                <div class="col-md-3 col-6 mb-4 mb-md-0">
+                    <h2 class="text-success font-weight-bold mb-0">-35%</h2>
+                    <p class="text-muted mb-0">Réduction moyenne CO₂</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <h2 class="text-success font-weight-bold mb-0">15</h2>
+                    <p class="text-muted mb-0">Années d'expertise</p>
+                </div>
+                <div class="col-md-3 col-6">
+                    <h2 class="text-success font-weight-bold mb-0">98%</h2>
+                    <p class="text-muted mb-0">Clients satisfaits</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# News Section #}
+    <div class="container my-5">
+        <h2 class="text-center mb-2 text-success font-weight-bold">📰 Dernières Actualités</h2>
+        <p class="text-center text-muted mb-5">Restez informé des dernières nouvelles écologiques</p>
+        <div class="row">
+            {% if posts is empty %}
+                <div class="col-12 text-center">
+                    <div class="card border-0 shadow-sm p-5">
+                        <p class="text-muted mb-0">Aucun article pour le moment.</p>
+                    </div>
+                </div>
+            {% else %}
+                {% for post in posts %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-header bg-success text-white py-2">
+                                <small>{{ post.publishedAt|date('d/m/Y') }}</small>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold">{{ post.title }}</h5>
+                                <p class="card-text text-muted small mb-2">
+                                    <span class="badge badge-light">Par {{ post.author.email }}</span>
+                                </p>
+                                <p class="card-text">{{ post.content|slice(0, 120) }}{% if post.content|length > 120 %}...{% endif %}</p>
+                            </div>
+                            <div class="card-footer bg-white border-0 pb-3">
+                                <a href="{{ path('app_post_show', {'slug': post.slug}) }}" class="btn btn-success btn-sm">
+                                    Lire la suite →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% if posts|length > 0 %}
+            <div class="text-center mt-4">
+                <a href="{{ path('app_post_index') }}" class="btn btn-outline-success">Voir toutes les actualités</a>
+            </div>
+        {% endif %}
+    </div>
+
+    {# CTA Section #}
+    <div class="bg-success text-white py-5">
+        <div class="container text-center">
+            <h3 class="font-weight-bold mb-3">Prêt à réduire votre impact environnemental ?</h3>
+            <p class="mb-4">Contactez-nous dès aujourd'hui pour un audit gratuit de votre empreinte carbone.</p>
+            <a href="{{ path('app_contact') }}" class="btn btn-light btn-lg">
+                Demander un audit gratuit
+            </a>
+        </div>
+    </div>
+{% endblock %}
