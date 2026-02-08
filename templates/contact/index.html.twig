@@ -1,21 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact Us{% endblock %}
+{% block title %}Contactez-nous - Evergreen{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h1>Contact Us</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white text-center py-4">
+                    <h2 class="mb-0">📧 Contactez-nous</h2>
+                    <p class="mb-0 mt-2">Une question ? Un projet ? Écrivez-nous !</p>
+                </div>
+                <div class="card-body p-4">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% endfor %}
 
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
-    {% endfor %}
+                    {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form_label(form.name, 'Votre nom', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Jean Dupont'}}) }}
+                                {{ form_errors(form.name) }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form_label(form.email, 'Votre email', {'label_attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'jean@exemple.fr'}}) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.subject, 'Sujet', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.subject, {'attr': {'class': 'form-control', 'placeholder': 'Objet de votre message'}}) }}
+                            {{ form_errors(form.subject) }}
+                        </div>
+                        <div class="mb-4">
+                            {{ form_label(form.message, 'Message', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 6, 'placeholder': 'Décrivez votre demande...'}}) }}
+                            {{ form_errors(form.message) }}
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success btn-lg px-5">
+                                Envoyer le message
+                            </button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
 
-    {{ form_start(form) }}
-        {{ form_row(form.name) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.subject) }}
-        {{ form_row(form.message) }}
-        <button class="btn btn-primary">Send</button>
-    {{ form_end(form) }}
+            <!-- Infos de contact -->
+            <div class="row mt-5 text-center">
+                <div class="col-md-4 mb-3">
+                    <div class="p-3">
+                        <div style="font-size: 2rem;">📍</div>
+                        <h5 class="text-success">Adresse</h5>
+                        <p class="text-muted mb-0">123 Rue de l'Écologie<br>75001 Paris, France</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="p-3">
+                        <div style="font-size: 2rem;">📞</div>
+                        <h5 class="text-success">Téléphone</h5>
+                        <p class="text-muted mb-0">+33 1 23 45 67 89</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="p-3">
+                        <div style="font-size: 2rem;">✉️</div>
+                        <h5 class="text-success">Email</h5>
+                        <p class="text-muted mb-0">contact@evergreen.fr</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

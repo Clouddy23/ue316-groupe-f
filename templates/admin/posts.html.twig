@@ -1,0 +1,42 @@
+{% extends 'admin/base.html.twig' %}
+{% set active_tab = 'posts' %}
+
+{% block title %}Articles - Admin{% endblock %}
+
+{% block admin_content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>📝 Gestion des articles</h2>
+    <a href="{{ path('admin_post_new') }}" class="btn btn-success">+ Nouvel article</a>
+</div>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td>{{ post.id }}</td>
+            <td><a href="{{ path('app_post_show', {'slug': post.slug}) }}" class="text-success">{{ post.title }}</a></td>
+            <td>{{ post.author.email }}</td>
+            <td>{{ post.publishedAt|date('d/m/Y') }}</td>
+            <td>
+                <a href="{{ path('admin_post_edit', {'id': post.id}) }}" class="btn btn-sm btn-outline-primary">Éditer</a>
+                <form method="post" action="{{ path('admin_post_delete', {'id': post.id}) }}" class="d-inline" onsubmit="return confirm('Supprimer cet article ?')">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.id) }}">
+                    <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="text-center text-muted">Aucun article</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

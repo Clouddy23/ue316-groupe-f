@@ -19,10 +19,20 @@ use App\Form\CommentType;
 final class PostController extends AbstractController
 {
     #[Route(name: 'app_post_index', methods: ['GET'])]
-    public function index(PostRepository $postRepository): Response
+    public function index(Request $request, PostRepository $postRepository): Response
     {
+        $page = max(1, $request->query->getInt('page', 1));
+        $limit = 10;
+        
+        $posts = $postRepository->findPaginated($page, $limit);
+        $total = $postRepository->countAll();
+        $totalPages = (int) ceil($total / $limit);
+
         return $this->render('post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $posts,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+            'total' => $total,
         ]);
     }
 
@@ -138,7 +148,7 @@ final class PostController extends AbstractController
     #[Route('/comment/{id}/flag', name: 'app_comment_flag', methods: ['GET'])]
     public function flag(Comment $comment, EntityManagerInterface $entityManager): Response
     {
-        $comment->setIsFlagged(true);
+        $comment->setIsFlagged(!$comment->isFlagged());
         $entityManager->flush();
 
         return $this->redirectToRoute('app_post_show', ['slug' => $comment->getPost()->getSlug()]);

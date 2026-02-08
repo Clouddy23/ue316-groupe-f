@@ -1,0 +1,62 @@
+{% extends 'admin/base.html.twig' %}
+{% set active_tab = 'users' %}
+
+{% block title %}Utilisateurs - Admin{% endblock %}
+
+{% block admin_content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>👥 Gestion des utilisateurs</h2>
+    <a href="{{ path('admin_user_new') }}" class="btn btn-success">+ Nouvel utilisateur</a>
+</div>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Rôle</th>
+            <th>Articles</th>
+            <th>Commentaires</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>
+                {{ user.email }}
+                {% if user == app.user %}<span class="badge badge-info">Vous</span>{% endif %}
+            </td>
+            <td>
+                {% if 'ROLE_ADMIN' in user.roles %}
+                    <span class="badge badge-danger">Admin</span>
+                {% else %}
+                    <span class="badge badge-secondary">Utilisateur</span>
+                {% endif %}
+            </td>
+            <td>{{ user.posts|length }}</td>
+            <td>{{ user.comments|length }}</td>
+            <td>
+                {% if user != app.user %}
+                    <form method="post" action="{{ path('admin_user_role', {'id': user.id}) }}" class="d-inline">
+                        <input type="hidden" name="_token" value="{{ csrf_token('role' ~ user.id) }}">
+                        <button class="btn btn-sm btn-outline-{% if 'ROLE_ADMIN' in user.roles %}warning{% else %}primary{% endif %}">
+                            {% if 'ROLE_ADMIN' in user.roles %}Retirer admin{% else %}Promouvoir{% endif %}
+                        </button>
+                    </form>
+                    <form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}" class="d-inline" onsubmit="return confirm('Supprimer cet utilisateur et tout son contenu ?')">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                        <button class="btn btn-sm btn-outline-danger">Supprimer</button>
+                    </form>
+                {% else %}
+                    <span class="text-muted">-</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="text-center text-muted">Aucun utilisateur</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

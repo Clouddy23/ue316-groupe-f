@@ -1,0 +1,107 @@
+@startuml Diagramme de classes - Evergreen
+
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor #E8F5E9
+    BorderColor #2E7D32
+    ArrowColor #2E7D32
+    HeaderBackgroundColor #4CAF50
+}
+
+title Diagramme de classes - Application Evergreen
+
+class User {
+    -id: int
+    -email: string
+    -roles: array
+    -password: string
+    --
+    +getId(): int
+    +getEmail(): string
+    +setEmail(email: string): static
+    +getUserIdentifier(): string
+    +getRoles(): array
+    +setRoles(roles: array): static
+    +getPassword(): string
+    +setPassword(password: string): static
+    +getPosts(): Collection<Post>
+    +addPost(post: Post): static
+    +removePost(post: Post): static
+    +getComments(): Collection<Comment>
+    +addComment(comment: Comment): static
+    +removeComment(comment: Comment): static
+}
+
+class Post {
+    -id: int
+    -title: string
+    -slug: string
+    -content: text
+    -publishedAt: DateTimeImmutable
+    --
+    +getId(): int
+    +getTitle(): string
+    +setTitle(title: string): static
+    +getSlug(): string
+    +setSlug(slug: string): static
+    +getContent(): string
+    +setContent(content: string): static
+    +getPublishedAt(): DateTimeImmutable
+    +setPublishedAt(publishedAt: DateTimeImmutable): static
+    +getAuthor(): User
+    +setAuthor(author: User): static
+    +getComments(): Collection<Comment>
+    +addComment(comment: Comment): static
+    +removeComment(comment: Comment): static
+}
+
+class Comment {
+    -id: int
+    -content: text
+    -createdAt: DateTimeImmutable
+    -isFlagged: bool
+    --
+    +getId(): int
+    +getContent(): string
+    +setContent(content: string): static
+    +getCreatedAt(): DateTimeImmutable
+    +setCreatedAt(createdAt: DateTimeImmutable): static
+    +isFlagged(): bool
+    +setIsFlagged(isFlagged: bool): static
+    +getPost(): Post
+    +setPost(post: Post): static
+    +getAuthor(): User
+    +setAuthor(author: User): static
+}
+
+interface UserInterface <<Symfony>> {
+    +getUserIdentifier(): string
+    +getRoles(): array
+}
+
+interface PasswordAuthenticatedUserInterface <<Symfony>> {
+    +getPassword(): string
+}
+
+User ..|> UserInterface
+User ..|> PasswordAuthenticatedUserInterface
+
+User "1" --> "*" Post : author
+User "1" --> "*" Comment : author
+Post "1" --> "*" Comment : post
+
+note bottom of User
+  Représente un utilisateur du site.
+  Peut avoir le rôle ROLE_USER ou ROLE_ADMIN.
+end note
+
+note bottom of Post
+  Article de blog avec slug unique.
+end note
+
+note bottom of Comment
+  Commentaire sur un article.
+  Peut être signalé (isFlagged).
+end note
+
+@enduml
