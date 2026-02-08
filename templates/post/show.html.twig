@@ -4,6 +4,13 @@
 
 {% block body %}
     <h1>Post</h1>
+    {% if post.imageName %}
+        <div style="margin: 20px 0;">
+            <img src="{{ vich_uploader_asset(post, 'imageFile') }}" 
+                 alt="{{ post.title }}" 
+                 style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        </div>
+    {% endif %}
 
     <table class="table">
         <tbody>
