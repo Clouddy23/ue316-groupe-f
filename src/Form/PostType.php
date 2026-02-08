@@ -3,27 +3,31 @@
 namespace App\Form;
 
 use App\Entity\Post;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('content')
-            ->add('publishedAt', null, [
-                'widget' => 'single_text'
+            ->add('title', null, [
+                'label' => 'Titre de l\'article'
             ])
-            // Retiré pour que l'auteur soit automatiquement l'utilisateur connecté
-            // ->add('author', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'id',
-            // ])
+            ->add('content', null, [
+                'label' => 'Contenu',
+                'attr' => ['rows' => 10]
+            ])
+
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de couverture (Optionnel)',
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => false,
+                'image_uri' => true,
+            ])
         ;
     }
 
