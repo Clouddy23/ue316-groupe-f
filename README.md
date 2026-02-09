@@ -13,7 +13,7 @@
 
 Un dépôt de code pour le développement du projet a été créé sur Github : [https://github.com/Clouddy23/ue316-groupe-f](https://github.com/Clouddy23/ue316-groupe-f).
 
-## Hebérgement
+## Hébergement
 
 Le site a été mis en production sur l'URL : [https://evergreen.alwaysdata.net/](https://evergreen.alwaysdata.net/).
 
