@@ -15,7 +15,7 @@ Un dépôt de code pour le développement du projet a été créé sur Github : 
 
 ## Hebérgement
 
-Le site a été mis en production sur l'url : ?
+Le site a été mis en production sur l'URL : [https://evergreen.alwaysdata.net/](https://evergreen.alwaysdata.net/).
 
 ## Contexte
 
@@ -46,9 +46,9 @@ Après une brève présentation du client, le chef de projet vous présente les 
 - [x] Spécifications fonctionnelles du projet
 - [x] Le diagramme de classe de la solution cible
 - [x] Le repository GITHUB du projet
-- [ ] Le lien vers l’application hébergée sur le web
+- [x] Le lien vers l’application hébergée sur le web
 
-## Spécificatios fonctionnelles
+## Spécifications fonctionnelles
 
 ### Symfony et bundles
 
