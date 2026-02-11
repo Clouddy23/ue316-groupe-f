@@ -6,7 +6,7 @@
 | :---------: | :--------: |
 | Mathilde C. | Clouddy23  |
 |   Kamo G.   | Spaghette5 |
-| Mathieu L.  |  mathleys  |
+| Mathieu L.  |  mathleyss |
 | Filippos K. |  filkat34  |
 
 ## Dépôt Github
